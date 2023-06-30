@@ -2,28 +2,34 @@ package ru.denfad.UrlShortener.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.denfad.UrlShortener.model.UrlModel;
+import ru.denfad.UrlShortener.model.UrlDocument;
+import ru.denfad.UrlShortener.repository.UrlMongoRepository;
 import ru.denfad.UrlShortener.repository.UrlRepository;
+import ru.denfad.UrlShortener.repository.UrlRepositoryImpl;
 
 @Service
 public class UrlService {
 
-    private final UrlRepository repository;
+    private final UrlMongoRepository mongoRepository;
+
+    private final UrlRepository urlRepository;
+
 
     @Autowired
-    public UrlService(UrlRepository repository) {
-        this.repository = repository;
+    public UrlService(UrlMongoRepository mongoRepository, UrlRepository urlRepository) {
+        this.mongoRepository = mongoRepository;
+        this.urlRepository = urlRepository;
     }
 
-    public String saveUrl(UrlModel url) {
-        repository.save(url);
-        return Base62Coder.encode(url.getId());
+    public String saveUrl(String url) {
+        UrlDocument u = mongoRepository.save(new UrlDocument(url));
+        return Base62Coder.encode(u.getId());
     }
 
     public String redirect(String shortUrl){
         int id = Base62Coder.decode(shortUrl);
-
-        return repository.findById(id).orElseThrow().getUrl();
+        String url =  urlRepository.readAndUpdateUrl(id).getUrl();
+        return url;
 
     }
 }

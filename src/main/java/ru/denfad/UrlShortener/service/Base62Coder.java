@@ -3,7 +3,7 @@ package ru.denfad.UrlShortener.service;
 
 public class Base62Coder {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    private static final int LENGHT = 5;
+    private static final int LENGHT = 7;
 
     protected static String encode(int num) {
       StringBuffer buffer = new StringBuffer();
@@ -14,6 +14,8 @@ public class Base62Coder {
             buffer.append(ALPHABET.charAt(i));
             num /= 62;
       }
+
+
 
       while(buffer.length() < LENGHT) {
           buffer.append('a');
