@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableCaching
 public class UrlShortenerApplication {
 
-
 	public static void main(String[] args) {
 		SpringApplication.run(UrlShortenerApplication.class, args);
 	}

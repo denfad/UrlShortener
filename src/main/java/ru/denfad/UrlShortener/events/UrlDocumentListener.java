@@ -6,12 +6,13 @@ import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventLis
 import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.stereotype.Component;
 import ru.denfad.UrlShortener.model.UrlDocument;
-import ru.denfad.UrlShortener.service.SequenceGenerator;
+import ru.denfad.UrlShortener.service.IdentifierGenerator;
+import ru.denfad.UrlShortener.service.impl.SequenceGenerator;
 
 @Component
 public class UrlDocumentListener extends AbstractMongoEventListener<UrlDocument> {
 
-    private SequenceGenerator sequenceGenerator;
+    private IdentifierGenerator sequenceGenerator;
 
     @Autowired
     public UrlDocumentListener(SequenceGenerator sequenceGenerator) {
@@ -21,7 +22,7 @@ public class UrlDocumentListener extends AbstractMongoEventListener<UrlDocument>
     @Override
     public void onBeforeConvert(BeforeConvertEvent<UrlDocument> event) {
         if (event.getSource().getId() < 1) {
-            event.getSource().setId(sequenceGenerator.generateSequence(UrlDocument.SEQUENCE_NAME));
+            event.getSource().setId(sequenceGenerator.generateIdentifier(UrlDocument.SERVER_NAME));
         }
     }
 

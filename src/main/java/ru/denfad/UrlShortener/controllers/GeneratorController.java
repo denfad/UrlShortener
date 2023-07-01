@@ -3,6 +3,7 @@ package ru.denfad.UrlShortener.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.denfad.UrlShortener.service.UrlService;
+import ru.denfad.UrlShortener.service.impl.UrlServiceImpl;
 
 @RestController
 @RequestMapping("/generate")

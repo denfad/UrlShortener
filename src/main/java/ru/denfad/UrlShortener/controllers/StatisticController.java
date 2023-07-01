@@ -1,28 +1,26 @@
 package ru.denfad.UrlShortener.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.denfad.UrlShortener.service.UrlService;
+import ru.denfad.UrlShortener.model.UrlDocument;
+import ru.denfad.UrlShortener.service.StatsService;
 import ru.denfad.UrlShortener.service.impl.UrlServiceImpl;
 
-import java.net.URI;
 
 @RestController
-@RequestMapping
-public class RedirectController {
+@RequestMapping("/stats")
+public class StatisticController {
 
     @Autowired
-    private UrlService service;
+    private StatsService service;
 
-    @GetMapping("/{url}")
-    public ResponseEntity<Void> redirect(@PathVariable String url){
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(service.redirect(url))).build();
+    @GetMapping(path = "/{page}", produces = "application/json")
+    public Page<UrlDocument> redirect(@PathVariable int page){
+        return service.getStatsPage(page,5);
     }
 
 }

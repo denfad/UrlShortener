@@ -1,11 +1,11 @@
-package ru.denfad.UrlShortener.service;
+package ru.denfad.UrlShortener.coder;
 
 
 public class Base62Coder {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final int LENGHT = 7;
 
-    protected static String encode(int num) {
+    public static String encode(int num) {
       StringBuffer buffer = new StringBuffer();
       int i;
 
@@ -23,7 +23,7 @@ public class Base62Coder {
       return buffer.reverse().toString();
   }
 
-  protected static int decode(String line) {
+  public static int decode(String line) {
         int result = 0;
         for(char c: line.toCharArray()){
             result *= 62;

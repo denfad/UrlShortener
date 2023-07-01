@@ -1,14 +1,21 @@
 package ru.denfad.UrlShortener.model;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
+import java.util.Date;
+
 @Document("urls")
+@PropertySource("classpath:application.properties")
 public class UrlDocument {
 
     @Transient
-    public static final String SEQUENCE_NAME = "urls_sequence";
+    public static final String SERVER_NAME = "server1";
 
     @Id
     private int id;
@@ -17,8 +24,13 @@ public class UrlDocument {
 
     private int redirects = 0;
 
-    public UrlDocument(String url) {
+    @Indexed(name = "createdAtIndex", expireAfter = "${url.shortener.ttl}")
+    private Date createdAt;
+
+
+    public UrlDocument(String url, Date createdAt) {
         this.url = url;
+        this.createdAt = createdAt;
     }
 
     public UrlDocument(int id, String url) {
@@ -27,6 +39,10 @@ public class UrlDocument {
     }
 
     public UrlDocument() {
+    }
+
+    public void fixTime() {
+        this.createdAt = Date.from(Instant.now());
     }
 
     public int getId() {
@@ -52,4 +68,14 @@ public class UrlDocument {
     public void setRedirects(int redirects) {
         this.redirects = redirects;
     }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+
 }
