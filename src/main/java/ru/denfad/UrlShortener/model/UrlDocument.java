@@ -1,6 +1,5 @@
 package ru.denfad.UrlShortener.model;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -24,8 +23,9 @@ public class UrlDocument {
 
     private int redirects = 0;
 
-    @Indexed(name = "createdAtIndex", expireAfter = "${url.shortener.ttl}")
+    @Indexed(name = "createdAtIndex", expireAfter = "#{@environment.getProperty('url.shortener.ttl')}")
     private Date createdAt;
+
 
 
     public UrlDocument(String url, Date createdAt) {
@@ -33,12 +33,8 @@ public class UrlDocument {
         this.createdAt = createdAt;
     }
 
-    public UrlDocument(int id, String url) {
-        this.id = id;
-        this.url = url;
-    }
-
     public UrlDocument() {
+
     }
 
     public void fixTime() {

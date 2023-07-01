@@ -19,4 +19,6 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     protected boolean autoIndexCreation(){
         return true;
     }
+
+
 }
