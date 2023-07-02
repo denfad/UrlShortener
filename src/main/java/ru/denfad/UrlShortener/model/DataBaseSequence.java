@@ -11,8 +11,6 @@ public class DataBaseSequence {
 
     private int seq;
 
-
-
     public String getId() {
         return id;
     }

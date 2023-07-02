@@ -20,9 +20,12 @@ public class SequenceGenerator implements IdentifierGenerator {
     private MongoOperations mongoOperations;
 
     public int generateIdentifier(String name) {
-        DataBaseSequence counter = mongoOperations.findAndModify(query(where("_id").is(name)),
-                new Update().inc("seq", 1), options().returnNew(true).upsert(true),
+        DataBaseSequence counter = mongoOperations.findAndModify(
+                query(where("_id").is(name)),
+                new Update().inc("seq", 1),
+                options().returnNew(true).upsert(true),
                 DataBaseSequence.class);
+
         return !Objects.isNull(counter) ? counter.getSeq() : 1;
     }
 

@@ -31,7 +31,6 @@ public class CustomExceptionHandler {
                 .body(new ExceptionResponse(new Date(), exception.getBody().getDetail(), HttpStatus.INTERNAL_SERVER_ERROR.value()));
     }
 
-
     @ExceptionHandler(UrlNotFoundException.class)
     public ResponseEntity<ExceptionResponse> notFoundException(UrlNotFoundException exception) {
         return ResponseEntity
@@ -45,5 +44,4 @@ public class CustomExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new ExceptionResponse(new Date(), exception.getLocalizedMessage(), HttpStatus.BAD_REQUEST.value()));
     }
-
 }

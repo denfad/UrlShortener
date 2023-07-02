@@ -26,8 +26,6 @@ public class UrlDocument {
     @Indexed(name = "createdAtIndex", expireAfter = "#{@environment.getProperty('url.shortener.ttl')}")
     private Date createdAt;
 
-
-
     public UrlDocument(String url, Date createdAt) {
         this.url = url;
         this.createdAt = createdAt;
@@ -72,6 +70,5 @@ public class UrlDocument {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-
 
 }

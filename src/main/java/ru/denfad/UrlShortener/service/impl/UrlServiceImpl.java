@@ -44,8 +44,7 @@ public class UrlServiceImpl implements UrlService, StatsService {
         try {
             String url = urlRepository.readAndUpdateUrl(id).getUrl();
             return url;
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             throw new UrlNotFoundException(String.format("link /%s not found", shortUrl));
         }
     }

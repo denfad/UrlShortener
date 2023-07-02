@@ -26,10 +26,6 @@ public class Base62Coder {
             int num = ALPHABET.indexOf(c);
             result += num;
         }
-
-
-
-
         return result;
   }
 
