@@ -8,15 +8,11 @@ public class Base62Coder {
     public static String encode(int num) {
       StringBuffer buffer = new StringBuffer();
       int i;
-
       while (num != 0) {
             i = num % 62;
             buffer.append(ALPHABET.charAt(i));
             num /= 62;
       }
-
-
-
       while(buffer.length() < LENGHT) {
           buffer.append('a');
       }

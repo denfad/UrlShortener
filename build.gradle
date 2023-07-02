@@ -23,10 +23,10 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb
-	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb
+	// https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
+	implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '8.0.1.Final'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '3.1.1'
 
 
