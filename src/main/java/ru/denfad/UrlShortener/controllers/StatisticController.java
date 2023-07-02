@@ -23,7 +23,7 @@ public class StatisticController {
     private StatsService service;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UrlStatistic> getStatsByPage(@RequestParam(defaultValue = "0") @Min(0) int page, @RequestParam(defaultValue = "10") int size){
+    public List<UrlStatistic> getStatsByPage(@RequestParam(defaultValue = "0") @Min(0) int page, @RequestParam(defaultValue = "10") @Min(1) int size){
         return service.getStatsPage(page,size);
     }
 

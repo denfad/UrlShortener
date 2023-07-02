@@ -21,8 +21,7 @@ public class GeneratorController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     GenerateDTO generateUrl(@Valid @RequestBody GenerateDTO request) {
-       return new GenerateDTO(host,service.saveUrl(request.getUrl()));
-
+        return new GenerateDTO(host+"r/", service.saveUrl(request.getUrl()));
     }
 
 }

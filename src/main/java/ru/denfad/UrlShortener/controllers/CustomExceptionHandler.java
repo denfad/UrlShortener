@@ -21,14 +21,14 @@ public class CustomExceptionHandler {
     public final ResponseEntity<Object> handleAllExceptions(Exception exception) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ExceptionResponse(new Date(), "SERVER ERROR", HttpStatus.INTERNAL_SERVER_ERROR.value()));
+                .body(new ExceptionResponse(new Date(), exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public final ResponseEntity<Object> methodValidException(MethodArgumentNotValidException exception) {
         return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ExceptionResponse(new Date(), exception.getBody().getDetail(), HttpStatus.INTERNAL_SERVER_ERROR.value()));
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ExceptionResponse(new Date(), exception.getBody().getDetail(), HttpStatus.BAD_REQUEST.value()));
     }
 
     @ExceptionHandler(UrlNotFoundException.class)

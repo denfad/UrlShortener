@@ -13,8 +13,9 @@ import ru.denfad.UrlShortener.service.impl.UrlServiceImpl;
 
 import java.net.URI;
 
+
 @RestController
-@RequestMapping
+@RequestMapping(path = "/r")
 public class RedirectController {
 
     @Autowired
