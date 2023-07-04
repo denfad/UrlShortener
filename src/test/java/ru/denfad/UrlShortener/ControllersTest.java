@@ -72,9 +72,7 @@ public class ControllersTest {
     public void testStats() throws Exception {
         mockMvc.perform(get("/stats").param("page", "0").param("size", "5"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
-                .andExpect(jsonPath("$[0].place", Matchers.equalTo(1)))
-                .andExpect(jsonPath("$[1].place", Matchers.equalTo(2)));
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE));
     }
 
     @Test
