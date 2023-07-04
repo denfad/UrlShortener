@@ -60,7 +60,7 @@ public class ControllersTest {
 
     @Test
     public void testRedirect() throws Exception {
-        mockMvc.perform(get("/r/aaaaaaj")).andExpect(status().is3xxRedirection());
+        mockMvc.perform(get("/r/aaaaaab")).andExpect(status().is3xxRedirection());
     }
 
     @Test

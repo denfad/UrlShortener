@@ -22,7 +22,7 @@ public class UrlDocumentListener extends AbstractMongoEventListener<UrlDocument>
     @Override
     public void onBeforeConvert(BeforeConvertEvent<UrlDocument> event) {
         if (event.getSource().getId() < 1) {
-            event.getSource().setId(sequenceGenerator.generateIdentifier(UrlDocument.SERVER_NAME));
+            event.getSource().setId(sequenceGenerator.generateIdentifier(UrlDocument.SEQUENCE));
         }
     }
 

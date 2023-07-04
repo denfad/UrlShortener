@@ -14,7 +14,7 @@ import java.util.Date;
 public class UrlDocument {
 
     @Transient
-    public static final String SERVER_NAME = "server1";
+    public static final String SEQUENCE = "url_sequence";
 
     @Id
     private int id;
