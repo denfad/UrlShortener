@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  mongodb:
+    image: arm64v8/mongo:latest
+    container_name: "mongodb"
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:27017" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+
+  app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: denfad/urlshortener
+    container_name: urlshortener
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+
+
+
+
